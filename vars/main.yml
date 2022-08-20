@@ -1,0 +1,4 @@
+---
+# vars file for vector-role
+
+vector_url: "https://packages.timber.io/vector/{{ vector_release }}/vector-{{ vector_release }}-{{ vector_version }}.x86_64.rpm"

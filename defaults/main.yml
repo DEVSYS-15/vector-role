@@ -1,0 +1,12 @@
+---
+# defaults file for vector-role
+
+vector_version: "1"
+vector_release: "0.22.2"
+
+clickhouse_http_port: "8123"
+
+clickhouse:
+  hosts:
+    clickhouse-01:
+      ansible_host: 172.17.2.62

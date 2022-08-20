@@ -1,0 +1,45 @@
+- name: Install Vector
+
+- name: Download Vector
+  become: true
+  ansible.builtin.get_url:
+    url: "{{ vector_url }}"
+    dest: files/vector-{{ vector_release }}-{{ vector_version }}.x86_64.rpm
+  delegate_to: localhost
+  run_once: true
+  tags: 
+    - "install vector"
+
+- name: Create a directory Vector if it does not exist
+  ansible.builtin.file:
+      path: ./vector
+      state: directory
+      mode: '0755'
+  tags: 
+      - "install vector"
+
+- name: Copy Vector packages
+  copy:
+    src:  vector-{{ vector_release }}-{{ vector_version }}.x86_64.rpm
+    dest: ./vector/
+  tags: 
+    - "install vector"      
+
+- name: Install vector packages
+  become: true
+  ansible.builtin.yum:
+    name: ./vector/vector-{{ vector_release }}-{{ vector_version }}.x86_64.rpm
+    state: present
+  notify: Start vector service
+  tags: 
+    - "install vector"
+
+- name: Copy config vector
+  template:
+      src: vector.j2
+      dest:  /etc/vector/vector.toml
+      backup: true
+  notify: Start vector service
+  tags: 
+    - "config vector"
+    - "install vector"

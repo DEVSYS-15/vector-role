@@ -1,0 +1,35 @@
+[sources.dummy_logs]
+type = "demo_logs"
+format = "syslog"
+interval = 1
+[transforms.parse_logs]
+type = "remap"
+inputs = ["dummy_logs"]
+source = '''
+. = parse_syslog!(string!(.message))
+'''
+
+# Print parsed logs to stdout
+[sinks.print]
+type = "console"
+inputs = ["parse_logs"]
+encoding.codec = "json"
+
+
+[sources.lastlog]
+type = "file"
+ignore_older_secs = 600
+include = [ "/var/log/dmesg" ]
+read_from = "beginning"
+
+[sinks.clickhouse]
+type = "clickhouse"
+inputs = ["lastlog"]
+endpoint = "http://{{ hostvars['clickhouse-01'].ansible_host }}:{{ clickhouse_http_port }}"
+database = "logs"
+table = "lastlog"
+skip_unknown_fields = true
+
+
+
+
