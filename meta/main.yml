@@ -2,15 +2,18 @@ galaxy_info:
   author: DEVSYS-15
   description: Downdload and install Vector
   company: your company (optional)
-
+  
   license: license (GPL-2.0-or-later, MIT, etc)
 
-  min_ansible_version: '2.1'
-
-   platforms:
+  min_ansible_version: 2.1
+  platforms:
     - name: EL
       versions:
         - 7
+        
+  galaxy_tags:
+    - Install Vector
+    - Config  Vector
        
 dependencies: []
 
