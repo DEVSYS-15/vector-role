@@ -1,4 +1,6 @@
 ---
 # tasks file for vector-role
-- name: includ install tasks
+- name: include install Vector tasks
   include_tasks: install.yml  
+  tags: 
+    - "Install Vector"

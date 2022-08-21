@@ -5,3 +5,4 @@
   ansible.builtin.systemd:
     name: vector
     state: restarted
+    enabled: yes
