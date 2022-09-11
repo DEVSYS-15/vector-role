@@ -3,9 +3,9 @@
   become: true
   ansible.builtin.get_url:
     url: "{{ vector_url }}"
-    dest: files/vector-{{ vector_release }}-{{ vector_version }}.x86_64.rpm
+    dest: ./vector-{{ vector_release }}-{{ vector_version }}.x86_64.rpm
   delegate_to: localhost
-  run_once: true
+  # run_once: true
   tags: 
     - "Install Vector"
 
@@ -19,7 +19,7 @@
 
 - name: Copy Vector packages
   copy:
-    src:  vector-{{ vector_release }}-{{ vector_version }}.x86_64.rpm
+    src:  ./vector-{{ vector_release }}-{{ vector_version }}.x86_64.rpm
     dest: ./vector/
   tags: 
     - "Install Vector"      

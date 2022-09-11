@@ -25,7 +25,7 @@ read_from = "beginning"
 [sinks.clickhouse]
 type = "clickhouse"
 inputs = ["lastlog"]
-endpoint = "http://{{ hostvars['clickhouse-01'].ansible_host }}:{{ clickhouse_http_port }}"
+endpoint = "http://{{ clickhouse_01_host }}:{{ clickhouse_http_port }}"
 database = "logs"
 table = "lastlog"
 skip_unknown_fields = true
